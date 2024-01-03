@@ -124,7 +124,6 @@ export default {
       const docRef = addDoc(collection(db, "projects"), {
         client: this.client,
         date: this.date,
-        date2: this.date2,
         works: this.works,
         projects: this.projectName,
         uid: this.uid,

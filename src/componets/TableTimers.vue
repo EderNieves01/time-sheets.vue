@@ -7,7 +7,6 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Date</th>
-          <th scope="col">Until</th>
           <th scope="col">Hours</th>
           <th scope="col">Project</th>
           <th scope="col">Status</th>
@@ -18,7 +17,6 @@
         <tr>
           <th scope="row">{{ id + 1 }}</th>
           <td>{{ works.date }}</td>
-          <td>{{ works.date2 }}</td>
           <td>{{ works.works }}</td>
           <td>{{ works.projects }}</td>
          
