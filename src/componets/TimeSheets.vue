@@ -67,6 +67,7 @@
         </div>
       </div>
     </form>
+     <VueDatePicker class="col-md-3 mt-2" v-model="date"></VueDatePicker>
   </div>
 
   <div class="container mt-3">
@@ -78,6 +79,8 @@
 <script>
 import TableTimers from "./TableTimers.vue";
 import db from "../firebase";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 import {
   collection,
   addDoc,
@@ -100,6 +103,7 @@ export default {
       status: false,
       admin: '',
       client: '',
+       date: null
     };
   },
   components: { TableTimers },

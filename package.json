@@ -8,8 +8,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^7.4.0",
     "firebase": "^10.7.1",
-    "sweetalert2": "^11.10.2",
+    "sweetalert2": "^11.6.13",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
