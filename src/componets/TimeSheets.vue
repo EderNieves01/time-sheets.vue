@@ -67,8 +67,10 @@
         </div>
       </div>
     </form>
-     <VueDatePicker class="col-md-3 mt-2" v-model="date"></VueDatePicker>
-  </div>
+    <div class="col-12 col-sm-12 col-md-3 mb-3 mt-2">
+       <VueDatePicker  v-model="date"></VueDatePicker>
+    </div>
+      </div>
 
   <div class="container mt-3">
     <hr />
