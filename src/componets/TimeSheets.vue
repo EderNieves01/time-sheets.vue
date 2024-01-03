@@ -9,24 +9,9 @@
       <div class="row mt-9">
         <div class="col-12 col-sm-12 col-md-3 mb-3">
           <label for="date"><h5>Date</h5></label>
-          <input
-            id="date"
-            v-model.trim="date"
-            class="form-control"
-            type="date"
-            required
-          />
+       <VueDatePicker  v-model="date"></VueDatePicker>
         </div>
-        <div class="col-12 col-sm-12 col-md-3 mb-3">
-          <label for="date2"><h5>Until</h5></label>
-          <input
-            id="date2"
-            v-model.trim="date2"
-            class="form-control"
-            type="date"
-            required
-          />
-        </div>
+
         <div class="col-12 col-sm-12 col-md-3 mb-3">
           <label for="time"><h5>TimeSheets</h5></label>
           <input
@@ -57,19 +42,16 @@
             <option value="G Smoke">G Smoke</option>
           </select>
         </div>
-        <div class="col mt-2">
+        <div class="col-12 col-sm-12 col-md-3 mb-3 mt-4">
           <button
             type="submit"
-            class="btn btn-primary col-sm-12 col-md-3 col-12 text-light"
+            class="btn btn-primary text-light "
           >
             Submit
           </button>
         </div>
       </div>
     </form>
-    <div class="col-12 col-sm-12 col-md-3 mb-3 mt-2">
-       <VueDatePicker  v-model="date"></VueDatePicker>
-    </div>
       </div>
 
   <div class="container mt-3">
@@ -97,15 +79,13 @@ export default {
     return {
       projects: [],
       projectsfirebase: [],
-      date: "",
-      date2: "",
+      date: null,
       works: null,
       projectName: "",
       uid: "",
       status: false,
       admin: '',
       client: '',
-       date: null
     };
   },
   components: { TableTimers },
@@ -114,60 +94,6 @@ export default {
     this.uid = user.uid;
     this.getProfile();
     this.controlAdmin();
-   
-   const arrayPrueba = [
-     {
-      precio: 250,
-      marca: "samsung",
-      modelo: "ewfsda",
-      color: "rojo",
-      cantidad: 2
-    },
-     {
-      precio: 500,
-      marca: "iphone",
-      modelo: "ewfsda",
-      color: "amarillo",
-      cantidad: 3
-    },
-     {
-      precio: 400,
-      marca: "nokia",
-      modelo: "ewfsda",
-      color: "verde",
-      cantidad: 4
-    },
-     {
-      precio: 300,
-      marca: "xiaomi",
-      modelo: "ewfsda",
-      color: "azul",
-      cantidad: 5
-    }
-   ];
-  const result = arrayPrueba.filter((price) => price.precio === 500);
-  console.log(result)
-  // const total = arrayPrueba.reduce((acumulador, actual) => acumulador + actual.precio, 0);
-  
-  // const totalCantidad = arrayPrueba.reduce((acumulador, actual) => {
-  //   const precioXcantidad = acumulador + actual.cantidad;
-  //   return acumulador + precioXcantidad}, 0);
-
-  // const totalTodo = total * totalCantidad;
-  // console.log(totalCantidad)
-  // console.log("total: " + total + ' ' + "cantidad: " + " " + totalCantidad + " " + "total Todo: " + totalTodo);
-//   const totalTodo = arrayPrueba.reduce((acumulador, actual) => {
-//   const precioPorCantidad = actual.precio * actual.cantidad;
-//   return acumulador + precioPorCantidad;
-// }, 0);
-arrayPrueba.map(cantidad => {
-  console.log((cantidad.precio * cantidad.cantidad) + ' ' + cantidad.marca + ' ' + cantidad.cantidad + ' ' + cantidad.precio)
-});
-arrayPrueba.forEach((Element) => 
-console.log(Element.precio * Element.cantidad));
-const totalTodo = arrayPrueba.reduce((acumulador, { precio, cantidad }) => acumulador + (precio * cantidad), 0);
-
-console.log("total Todo: " + totalTodo);
 
   },
   methods: {
