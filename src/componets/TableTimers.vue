@@ -1,12 +1,15 @@
 <template>
   <div v-if="projects.length > 0">
     <h3>pendiente: hacer progresive bar</h3>
-
+     <div v-for="timestamp in projects.date" :key="timestamp.seconds">
+      {{ format(timestamp['seconds']) }}
+    </div>
     <table class="table table-responsive">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Date</th>
+          <th scope="col">Until</th>
           <th scope="col">Hours</th>
           <th scope="col">Project</th>
           <th scope="col">Status</th>
@@ -16,7 +19,8 @@
       <tbody v-for="(works, id) in projects" :key="id">
         <tr>
           <th scope="row">{{ id + 1 }}</th>
-          <td>{{ works.date }}</td>
+           <td >{{ format(works.date)}} </td>
+           <td >{{  format(works.date2)  }}</td>              
           <td>{{ works.works }}</td>
           <td>{{ works.projects }}</td>
          
@@ -55,11 +59,25 @@ export default {
     },
   },
   mounted(){
+    // console.log(this.projects.date)
     if(JSON.parse(localStorage.getItem("user")).uid === '2ca0Pr8KZTUTJpohiqJYHdWqx7C2'){
       this.client = true;
+
     }
   },
   methods: {
+      format(seconds) {
+        if(seconds){
+        const date = new Date(seconds.seconds * 1000);
+        return date.toLocaleDateString()  
+        }else{
+          return '';
+        }
+  ; // Puedes personalizar el formato según tus preferencias
+},
+  
+    
+
     async changeState(id) {
 
       const admin = JSON.parse(localStorage.getItem("user")).uid;
@@ -75,6 +93,7 @@ export default {
         // this.projects[id].status = !this.projects[id].status;
       }
     },
+    
   },
 };
 </script>

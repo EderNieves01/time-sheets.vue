@@ -7,9 +7,18 @@
     </div>
     <form @submit.prevent="createdTimeSheets()">
       <div class="row mt-9">
-        <div class="col-12 col-sm-12 col-md-3 mb-3">
+        <div class="col-12 col-sm-12 col-md-12 mb-3">
           <label for="date"><h5>Date</h5></label>
-       <VueDatePicker  v-model="date"></VueDatePicker>
+          <VueDatePicker
+            v-model.value="date"
+            range
+            range-max="4"
+            :disabled-week-days="[6, 0]"
+            placeholder="mm/dd/yyyy"
+            :max-date="new Date()"
+            required
+          >
+          </VueDatePicker>
         </div>
 
         <div class="col-12 col-sm-12 col-md-3 mb-3">
@@ -43,16 +52,13 @@
           </select>
         </div>
         <div class="col-12 col-sm-12 col-md-3 mb-3 mt-4">
-          <button
-            type="submit"
-            class="btn btn-primary text-light "
-          >
+          <button type="submit" class="btn btn-primary text-light">
             Submit
           </button>
         </div>
       </div>
     </form>
-      </div>
+  </div>
 
   <div class="container mt-3">
     <hr />
@@ -63,132 +69,122 @@
 <script>
 import TableTimers from "./TableTimers.vue";
 import db from "../firebase";
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 import {
   collection,
   addDoc,
   getDocs,
   query,
   where,
-  onSnapshot
+  onSnapshot,
 } from "firebase/firestore";
 
 export default {
   data() {
     return {
       projects: [],
-      projectsfirebase: [],
-      date: null,
+      date: "",
+      date1: undefined,
       works: null,
       projectName: "",
       uid: "",
       status: false,
-      admin: '',
-      client: '',
+      admin: "",
+      client: "",
     };
   },
-  components: { TableTimers },
+  components: { TableTimers, VueDatePicker },
   mounted() {
     const user = JSON.parse(localStorage.getItem("user"));
     this.uid = user.uid;
     this.getProfile();
     this.controlAdmin();
-
   },
   methods: {
-      async  getProfile(){
-        const uid = JSON.parse(localStorage.getItem('user')).uid; 
-        let profileRole = '';
-        
-             const clients = collection(db, "clients");
+    async getProfile() {
+      const uid = JSON.parse(localStorage.getItem("user")).uid;
+      let profileRole = "";
+      const clients = collection(db, "clients");
       const q = query(clients, where("id", "==", uid));
-
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        
-         profileRole = doc.data().role;
+        // console.log(doc.id, " => ", doc.data());
+        profileRole = doc.data().role;
+        this.admin = profileRole;
+        // console.log(this.admin);
+      });
+    },
 
-         this.admin = profileRole;
-         console.log(this.admin)
-      }
-      );
-        },
-
-    createdTimeSheets() {
-      this.client = JSON.parse(localStorage.getItem('client')).name;
-      console.log(JSON.parse(localStorage.getItem('client')))
+    async createdTimeSheets() {
+      this.client = JSON.parse(localStorage.getItem("client")).name;
+      console.log(JSON.parse(localStorage.getItem("client")));
+      console.log(new Date(this.date * 1000).toDateString());
       //mandar el objeto a un documento ("todos") ya creado con id a la base de datos
-      const docRef = addDoc(collection(db, "projects"), {
+      const docRef = await addDoc(collection(db, "projects"), {
+        uid: this.uid,
         client: this.client,
-        date: this.date,
+        date: this.date[0],
+        date2: this.date[1],
         works: this.works,
         projects: this.projectName,
-        uid: this.uid,
         status: false,
       });
-      console.log("estoy entrando");
-
+      // console.log(docRef);
       //reset form
-      this.date = "";
-      this.date2 = "";
+      this.date = null;
       this.works = null;
       this.projectName = "";
     },
 
     async getDoc() {
-  const projectsCollection = collection(db, "projects");
+      const projectsCollection = collection(db, "projects");
 
-  onSnapshot(projectsCollection, (querySnapshot) => {
-    // Limpiar el array antes de actualizarlo para evitar duplicados
-    this.projects = [];
+      onSnapshot(projectsCollection, (querySnapshot) => {
+        // Limpiar el array antes de actualizarlo para evitar duplicados
+        this.projects = [];
 
-    querySnapshot.forEach((doc) => {
-      const todo = {
-        id: doc.id,
-        date: doc.data().date,
-        date2: doc.data().date2,
-        projects: doc.data().projects,
-        status: doc.data().status,
-        works: doc.data().works,
-        client: doc.data().client,
-      };
-      this.projects.push(todo);
-    });
-  });
-},
-
-     queryDoc() {
-      const todosRef = collection(db, "projects");
-      const q = query(todosRef, where("uid", "==", this.uid));
-       this.projects = [];
-      onSnapshot(q, (querySnapshot) => {
-       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        const objectTimer = {
-          id: doc.id,
-          date: doc.data().date,
-          date2: doc.data().date2,
-          projects: doc.data().projects,
-          status: doc.data().status,
-          works: doc.data().works,
-        };
-        this.projects.push(objectTimer);
-      }
-      );
+        querySnapshot.forEach((doc) => {
+          const todo = {
+            id: doc.id,
+            date: doc.data().date,
+            date2: doc.data().date2,
+            projects: doc.data().projects,
+            status: doc.data().status,
+            works: doc.data().works,
+            client: doc.data().client,
+          };
+          this.projects.push(todo);
+        });
       });
     },
 
-     controlAdmin(){
+    queryDoc() {
+      const todosRef = collection(db, "projects");
+      const q = query(todosRef, where("uid", "==", this.uid));
+      this.projects = [];
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // console.log(doc.id, " => ", doc.data());
+          const objectTimer = {
+            id: doc.id,
+            date: doc.data().date,
+            projects: doc.data().projects,
+            status: doc.data().status,
+            works: doc.data().works,
+          };
+          this.projects.push(objectTimer);
+        });
+      });
+    },
+
+    controlAdmin() {
       const admin = this.uid;
-       if(admin === "2ca0Pr8KZTUTJpohiqJYHdWqx7C2"){
+      if (admin === "2ca0Pr8KZTUTJpohiqJYHdWqx7C2") {
         return this.getDoc();
-       }else{
+      } else {
         return this.queryDoc();
-       }
+      }
     },
   },
 };
