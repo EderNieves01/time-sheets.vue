@@ -12,7 +12,6 @@
           range
           range-max="4"
           :disabled-week-days="[6, 0]"
-         
           :max-date="new Date()"
           required
           

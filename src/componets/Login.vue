@@ -5,7 +5,7 @@
     id="container"
   >
     <div class="form-container sign-up">
-      <form @submit.prevent="register(this.email, this.password)">
+      <form @submit.prevent="register(this.emailRegister, this.passwordRegister)">
         <h1>Create Account</h1>
         <div class="social-icons">
           <img src="../assets/img/snoworiginal.png" alt="" srcset="" />
@@ -13,13 +13,13 @@
         <span>or use your email for registeration</span>
         <input
           required="true"
-          v-model="email"
+          v-model="emailRegister"
           type="email"
           placeholder="Email"
         />
         <input
           required="true"
-          v-model="password"
+          v-model="passwordRegister"
           type="password"
           placeholder="password"
           min="7"
@@ -102,6 +102,8 @@ export default {
 
       email: "",
       password: "",
+      emailRegister: "",
+      passwordRegister: "",
       repassword: "",
       errorMessage: "",
       container: false,
@@ -121,13 +123,13 @@ export default {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
 
-          if (this.password === this.repassword) {
+          if (this.passwordRegister === this.repassword) {
             const user = userCredential.user;
             console.log("¡Registrado!", user);
             localStorage.setItem("user", JSON.stringify(user));
              
-            this.email = "";
-            this.password = "";
+            this.emailRegister = "";
+            this.passwordRegister = "";
             this.repassword = "";
             router.push("/registeruser");
 
