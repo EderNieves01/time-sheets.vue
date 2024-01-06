@@ -1,58 +1,55 @@
 <template>
-  <div class="container mt-3 ">
-    <form @submit.prevent="send()" class="form-control shadow-4">
-      <div>
-        <div class="user container-center text-center mb-3">
-          <img src="../assets/img/user2.png" width="200px" alt="" srcset="" />
-          <h3 class="text-muted">Complete Your <span class="badge bg-warning text-dark"> Register </span></h3>
-    
+  <div class="container mt-5">
+    <form @submit.prevent="send" class="shadow-lg p-4 bg-light rounded">
+      <div class="text-center mb-4">
+        <img src="../assets/img/user2.png" width="100" alt="User Image" />
+        <h3 class="mt-3 text-muted">Complete Your Registration</h3>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              v-model.trim="firstName"
+              class="form-control"
+              type="text"
+              id="firstName"
+              placeholder="Enter your first name"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              v-model.trim="lastName"
+              class="form-control"
+              type="text"
+              id="lastName"
+              placeholder="Enter your last name"
+              required
+            />
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col col-sm-6">
-          <input
-            v-model.trim="firstName"
-            class="form-control"
-            type="text"
-            placeholder="FirstName"
-            aria-label="default input example"
-            required
-          />
-        </div>
-        <div class="co col-sm-6">
-          <input
-            v-model.trim="lastName"
-            class="form-control"
-            type="text"
-            placeholder="LastName"
-            aria-label="default input example"
-            required
-          />
-        </div>
-      </div>
-      <select
-        v-model="role"
-        class="form-select form-select-sm mt-3"
-        aria-label=".form-select-sm example"
-        required
-      >
-        <option selected>Role</option>
-        <option value="Admin">Admin</option>
-        <option value="Client">Client</option>
-      </select>
-      <div class="co col-sm-12 mt-3 pb-3">
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number</label>
         <input
-          v-model.trim="phone"
+          v-model="phone" 
           class="form-control"
-          type="number"
-          placeholder="Phone"
-          aria-label="default input example"
+          type="tel"
+          id="phone"
+          maxlength="10"
+          placeholder="Enter your phone number"
         />
       </div>
-      <div class="text-center mb-2">
-        <button class="btn-sm btn-primary px-3">Send</button>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
-      <input type="file" id="myfile" name="myfile"><br><br>
     </form>
   </div>
 </template>
@@ -69,8 +66,9 @@ export default {
       firstName: "",
       lastName: "",
       role: "",
-      phone: /^\d{1,10}$/,
+      phone: '',
       img: null,
+      fileName: null,
     };
   },
   mounted(){
@@ -80,26 +78,27 @@ export default {
               icon: "success",
               confirmButtonText: "Ok",
             });
+            
   },
   methods: {
     async send() {
-
-      //send document
+try {
+   //send document
       await addDoc(collection(db, "clients"), {
         id: JSON.parse(localStorage.getItem("user")).uid,
         name: this.firstName,
         lastName: this.lastName,
-        role: this.role,
         phone: this.phone,
       });
-
+} catch (e) {
+  console.log(e)
+}
       //reset form
       this.firstName = "";
       this.lastName = "";
-      this.role = "";
       this.phone = "";
       router.push('/')
     },
-  },
-};
+  }
+}
 </script>

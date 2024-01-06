@@ -3,7 +3,7 @@
   <nav v-if="disableNav()" class="color navbar navbar-expand-lg navbar-light " >
   <div class="container-fluid ">
     <div class="d-flex align-items-center">
-          <img class="mx-2 rounded-circle" src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" alt="User Avatar">
+          <img class="mx-2 rounded-circle" src="../assets/img/snoworiginal.png" alt="User Avatar">
         </div>
     <router-link class="navbar-brand px-4 text-light" to="/">SnowTimeSheets</router-link>
    

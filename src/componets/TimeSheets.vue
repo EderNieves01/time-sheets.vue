@@ -1,68 +1,64 @@
 <template>
-  <div></div>
-  <div class="container text-center">
-    <div class="title mt-3">
+  <div class="container mt-3 text-center">
+    <div class="title">
       <h1>Times Sheets</h1>
       <hr />
     </div>
-    <form @submit.prevent="createdTimeSheets()">
-      <div class="row mt-9">
-        <div class="col-12 col-sm-12 col-md-12 mb-3">
-          <label for="date"><h5>Date</h5></label>
-          <VueDatePicker
-            v-model.value="date"
-            range
-            range-max="4"
-            :disabled-week-days="[6, 0]"
-            placeholder="mm/dd/yyyy"
-            :max-date="new Date()"
-            required
-          >
-          </VueDatePicker>
-        </div>
+    <form @submit.prevent="createdTimeSheets()" class="row mt-4 g-3">
+      <div class="col-md-6 mb-3">
+        <label for="date" class="form-label"><h5>Date</h5></label>
+        <VueDatePicker
+          v-model.value="date"
+          range
+          range-max="4"
+          :disabled-week-days="[6, 0]"
+         
+          :max-date="new Date()"
+          required
+          
+        ></VueDatePicker>
+      </div>
 
-        <div class="col-12 col-sm-12 col-md-3 mb-3">
-          <label for="time"><h5>TimeSheets</h5></label>
-          <input
-            id="time"
-            v-model.trim="works"
-            class="form-control"
-            type="number"
-            placeholder="0"
-            min="0"
-            max="50"
-            required
-          />
-        </div>
+      <div class="col-md-3 mb-3">
+        <label for="time" class="form-label"><h5>TimeSheets</h5></label>
+        <input
+          id="time"
+          v-model.trim="works"
+          class="form-control"
+          type="number"
+          placeholder="0"
+          min="0"
+          max="50"
+          required
+        />
+      </div>
 
-        <div class="col-12 col-sm-12 col-md-3 mb-3">
-          <label for="select"><h5>Project</h5></label>
-          <select
-            id="select"
-            v-model.trim="projectName"
-            class="form-select"
-            aria-label="form-select-sm example"
-            required
-          >
-            <option value="" disabled selected>Select project</option>
-            <option value="Domi Canastas">Domi Canastas</option>
-            <option value="Fitpass">Fitpass</option>
-            <option value="Vagay">Vagay</option>
-            <option value="G Smoke">G Smoke</option>
-          </select>
-        </div>
-        <div class="col-12 col-sm-12 col-md-3 mb-3 mt-4">
-          <button type="submit" class="btn btn-primary text-light">
-            Submit
-          </button>
-        </div>
+      <div class="col-md-3 mb-3">
+        <label for="select" class="form-label"><h5>Project</h5></label>
+        <select
+          id="select"
+          v-model.trim="projectName"
+          class="form-select"
+          aria-label="Select Project"
+          required
+        >
+          <option value="" disabled>Select project</option>
+          <option value="Domi Canastas">Domi Canastas</option>
+          <option value="Fitpass">Fitpass</option>
+          <option value="Vagay">Vagay</option>
+          <option value="G Smoke">G Smoke</option>
+        </select>
+      </div>
+
+      <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-primary text-light">Submit</button>
       </div>
     </form>
-  </div>
 
-  <div class="container mt-3">
-    <hr />
-    <table-timers :projects="projects" />
+    <div class="container mt-3">
+      <hr />
+      <table-timers :projects="projects" />
+    </div>
   </div>
 </template>
 

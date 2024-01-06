@@ -1,6 +1,6 @@
 <template>
     <div class="text-center mt-3">
-        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 150px;"
+        <img src="../assets/img/snoworiginal.png" class="rounded-circle mb-3" style="width: 150px;"
   alt="Avatar" />
 
 <h1 class="mb-2"><strong>{{ name }}</strong></h1>
