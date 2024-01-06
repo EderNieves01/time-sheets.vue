@@ -35,7 +35,7 @@ export default {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         const clientsFire = {
           id: doc.id,
           name: doc.data().name,
@@ -45,7 +45,7 @@ export default {
         };
      localStorage.setItem('client',JSON.stringify(clientsFire));  
         // this.projects.push(objectTimer);
-        console.log(clientsFire)
+        // console.log(clientsFire)
         this.name = clientsFire.name;
         this.lastName = clientsFire.lastName;
         this.phone = clientsFire.phone;
