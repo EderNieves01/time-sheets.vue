@@ -6,7 +6,7 @@
   >
     <div class="form-container sign-up">
       <form @submit.prevent="register(this.emailRegister, this.passwordRegister)">
-        <h1>Create Account</h1>
+        <h2>Create Account</h2>
         <div class="social-icons">
           <img src="../assets/img/snoworiginal.png" alt="" srcset="" />
         </div>
@@ -59,7 +59,7 @@
           maxlength="10"
         />
         
-        <a href="#">Forget Your Password?</a>
+     <a href="#" @click="forgetPassword">Forget Your Password?</a> 
         <button type="submit">Sign In</button>
       </form>
     </div>
@@ -110,7 +110,15 @@ export default {
 
     };
   },
-  methods: {
+  methods: { 
+    forgetPassword(){
+         Swal.fire({
+              title: "Ups!",
+              text: "If you have forgotten your password, contact us.",
+              icon: "warning",
+              confirmButtonText: "Ok",
+            });
+    },
     activeRegister() {
 
       this.container = !this.container;
