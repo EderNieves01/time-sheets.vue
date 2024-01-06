@@ -24,10 +24,10 @@
           <router-link active-class="active fw-bold" class="nav-link" aria-current="page" to="/">addTimeSheets</router-link>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link active-class="active fw-bold" class="nav-link" to="/about">TimeSheets</router-link>
         </li>
-           
+            -->
         <li v-show="!signout" class="nav-item">
           <router-link active-class="active fw-bold" class="nav-link" to="/login" tabindex="-1" aria-disabled="true">Log In</router-link>
         </li>
