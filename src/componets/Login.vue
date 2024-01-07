@@ -5,7 +5,9 @@
     id="container"
   >
     <div class="form-container sign-up">
-      <form @submit.prevent="register(this.emailRegister, this.passwordRegister)">
+      <form
+        @submit.prevent="register(this.emailRegister, this.passwordRegister)"
+      >
         <h2>Create Account</h2>
         <div class="social-icons">
           <img src="../assets/img/snoworiginal.png" alt="" srcset="" />
@@ -20,7 +22,7 @@
         <input
           required="true"
           v-model="passwordRegister"
-          type="password"
+          :type="typePassword ? 'password' : 'text'"
           placeholder="password"
           min="7"
           max="10"
@@ -28,11 +30,12 @@
         <input
           required="true"
           v-model="repassword"
-          type="password"
+          :type="typePassword ? 'password' : 'text'"
           placeholder="rePassword"
           min="7"
           max="10"
         />
+       <a @click="showPassword()" class="mt-1 mb-1">Show password</a> 
         <button type="submit">Sign Up</button>
       </form>
     </div>
@@ -53,13 +56,13 @@
         <input
           required="true"
           v-model="password"
-          type="password"
+          :type="typePassword ? 'password' : 'text'"
           placeholder="Password"
           minlength="6"
           maxlength="10"
         />
-        
-     <a href="#" @click="forgetPassword">Forget Your Password?</a> 
+        <a @click="showPassword()" class="mt-1 mb-0">Show password</a> 
+        <a href="#" @click="forgetPassword">Forget Your Password?</a>
         <button type="submit">Sign In</button>
       </form>
     </div>
@@ -97,9 +100,7 @@ import router from "../router/index";
 
 export default {
   data() {
-
     return {
-
       email: "",
       password: "",
       emailRegister: "",
@@ -107,49 +108,42 @@ export default {
       repassword: "",
       errorMessage: "",
       container: false,
-
+      typePassword: 'password',
     };
   },
-  methods: { 
-    forgetPassword(){
-         Swal.fire({
-              title: "Ups!",
-              text: "If you have forgotten your password, contact us.",
-              icon: "warning",
-              confirmButtonText: "Ok",
-            });
+  methods: {
+    forgetPassword() {
+      Swal.fire({
+        title: "Ups!",
+        text: "If you have forgotten your password, contact us.",
+        icon: "warning",
+        confirmButtonText: "Ok",
+      });
     },
     activeRegister() {
-
       this.container = !this.container;
-
     },
     register(email, password) {
-
       const auth = getAuth();
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-
           if (this.passwordRegister === this.repassword) {
             const user = userCredential.user;
             console.log("¡Registrado!", user);
             localStorage.setItem("user", JSON.stringify(user));
-             
+
             this.emailRegister = "";
             this.passwordRegister = "";
             this.repassword = "";
             router.push("/registeruser");
-
           } else {
-
             Swal.fire({
               title: "Error!",
               text: "Passwords do not match",
               icon: "error",
               confirmButtonText: "Ok",
             });
-
           }
         })
         .catch((error) => {
@@ -178,12 +172,12 @@ export default {
           router.push("/");
         })
         .catch((error) => {
-            Swal.fire({
-              title: "Error!",
-              text: "check your email or password again",
-              icon: "error",
-              confirmButtonText: "Ok",
-            });
+          Swal.fire({
+            title: "Error!",
+            text: "check your email or password again",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
 
           const errorCode = error.code;
           this.errorMessage = error.message;
@@ -191,6 +185,10 @@ export default {
         });
       console.log("entrando login");
     },
+    showPassword(){
+      this.typePassword = !this.typePassword
+      
+    }
   },
 };
 </script>
