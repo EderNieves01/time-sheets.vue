@@ -21,7 +21,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between w-100">
 
         <li class="nav-item">
-          <router-link active-class="active fw-bold" class="nav-link text-dark" aria-current="page" to="/">addTimeSheets</router-link>
+          <router-link active-class="active fw-bold" class="nav-link text-dark" aria-current="page" to="/">addHours</router-link>
         </li>
 
         <!-- <li class="nav-item">
