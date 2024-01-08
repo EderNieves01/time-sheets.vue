@@ -62,13 +62,9 @@ import { addDoc, doc, collection } from "firebase/firestore";
 export default {
   data() {
     return {
-      arrUser: [],
       firstName: "",
       lastName: "",
-      role: "",
       phone: '',
-      img: null,
-      fileName: null,
     };
   },
   mounted(){

@@ -59,7 +59,7 @@
           :type="typePassword ? 'password' : 'text'"
           placeholder="Password"
           minlength="6"
-          maxlength="10"
+          maxlength="20"
         />
         <a @click="showPassword()" class="mt-1 mb-0">Show password</a> 
         <a href="#" @click="forgetPassword">Forget Your Password?</a>
@@ -130,7 +130,7 @@ export default {
         .then((userCredential) => {
           if (this.passwordRegister === this.repassword) {
             const user = userCredential.user;
-            console.log("¡Registrado!", user);
+            // console.log("¡Registrado!", user);
             localStorage.setItem("user", JSON.stringify(user));
 
             this.emailRegister = "";
@@ -153,7 +153,6 @@ export default {
 
           // ..
         });
-      console.log("entrando");
     },
 
     login(email, password) {
@@ -165,8 +164,8 @@ export default {
           const user = userCredential.user;
           // ...
           localStorage.setItem("user", JSON.stringify(user));
-          console.log(user);
-          console.log(user.uid);
+          // console.log(user);
+          // console.log(user.uid);
           this.email = "";
           this.password = "";
           router.push("/");
@@ -183,7 +182,7 @@ export default {
           this.errorMessage = error.message;
           console.log(this.errorMessage);
         });
-      console.log("entrando login");
+      // console.log("entrando login");
     },
     showPassword(){
       this.typePassword = !this.typePassword
