@@ -1,11 +1,11 @@
 <template>
     <div>
-  <nav v-if="disableNav()" class="color navbar navbar-expand-lg navbar-light " >
+  <nav v-if="disableNav()" class="color navbar navbar-expand-lg " >
   <div class="container-fluid ">
-    <div class="d-flex align-items-center">
-          <img class="mx-2 rounded-circle" src="../assets/img/snoworiginal.png" alt="User Avatar">
+    <div class="d-flex align-items-center ">
+          <img class="mx-2 rounded-circle border border-secondary border-2" src="../assets/img/snoworiginal.png" alt="User Avatar">
         </div>
-    <router-link class="navbar-brand px-4 text-light" to="/">SnowTimeSheets</router-link>
+    <router-link class="navbar-brand px-4 text-dark" to="/">SnowTimeSheets</router-link>
    
 <button class="navbar-toggler " type="button" 
     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -21,7 +21,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between w-100">
 
         <li class="nav-item">
-          <router-link active-class="active fw-bold" class="nav-link" aria-current="page" to="/">addTimeSheets</router-link>
+          <router-link active-class="active fw-bold" class="nav-link text-dark" aria-current="page" to="/">addTimeSheets</router-link>
         </li>
 
         <!-- <li class="nav-item">
@@ -33,7 +33,7 @@
         </li>
 
         <li class="nav-item">
-          <router-link active-class="active fw-bold" class="nav-link" to="/profile" tabindex="-1" aria-disabled="true">Profile</router-link>
+          <router-link active-class="active fw-bold" class="nav-link text-dark" to="/profile" tabindex="-1" aria-disabled="true">Profile</router-link>
         </li>
 
        <li class="nav-item">
@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 .color{
-  background-color: rgb(63, 144, 237);
+  background: linear-gradient(to right, #daed5e, #ecd046);
 }
 img{
   width: 50px;
