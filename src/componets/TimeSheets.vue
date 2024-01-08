@@ -11,10 +11,8 @@
           v-model.value="date"
           range
           range-max="4"
-          :disabled-week-days="[6, 0]"
           :max-date="new Date()"
           required
-          
         ></VueDatePicker>
       </div>
 
@@ -26,8 +24,7 @@
           class="form-control"
           type="number"
           placeholder="0"
-          min="0"
-          max="50"
+          min="1"
           required
         />
       </div>
