@@ -8,9 +8,9 @@
             <th scope="col">Date</th>
             <th scope="col">Until</th>
             <th scope="col">Hours</th>
-            <th scope="col">Project</th>
+            <th scope="col">Project</th> 
+            <th v-show="client" scope="col">Developer</th>
             <th scope="col">Status</th>
-            <th v-show="client" scope="col">Client</th>
           </tr>
         </thead>
         <tbody>
@@ -18,15 +18,16 @@
             <th scope="row">{{ id + 1 }}</th>
             <td>{{ format(works.date) }}</td>
             <td>{{ format(works.date2) }}</td>
-            <td>{{ works.works }}</td>
-            <td>{{ works.projects }}</td>
+           <td>{{ works.works }}</td>
+            <td>{{ works.projects }}</td> 
+             <td v-show="client">{{ works.client }}</td>
             <td
               @click="changeState(works.id)"
               :class="works.status ? 'text-success' : 'text-danger'"
             >
               {{ works.status ? "Pagado" : "Pendiente" }}
             </td>
-            <td v-show="client">{{ works.client }}</td>
+           
           </tr>
         </tbody>
       </table>
