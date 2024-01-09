@@ -37,14 +37,7 @@
 
       <div class="mb-3">
         <label for="phone" class="form-label">Phone Number</label>
-        <input
-          v-model="phone" 
-          class="form-control"
-          type="tel"
-          id="phone"
-          maxlength="10"
-          placeholder="Enter your phone number"
-        />
+        <MaskInput class="form-control" v-model="phone" mask="(###) ####-####" placeholder="Enter your phone number"/>
       </div>
 
       <div class="text-center">
@@ -59,6 +52,7 @@ import Swal from "sweetalert2";
 import db from "../firebase";
 import router from "../router/index"
 import { addDoc, doc, collection } from "firebase/firestore";
+import { MaskInput } from 'vue-3-mask';
 export default {
   data() {
     return {
@@ -66,6 +60,9 @@ export default {
       lastName: "",
       phone: '',
     };
+  },
+   components: {
+    MaskInput,
   },
   mounted(){
     Swal.fire({

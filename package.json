@@ -12,6 +12,7 @@
     "firebase": "^10.7.1",
     "sweetalert2": "^11.6.13",
     "vue": "^3.3.4",
+    "vue-3-mask": "^0.0.1-alpha",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
