@@ -157,7 +157,7 @@ export default {
         // const result2 = this.projects.filter(
         //   (element) => element.status === true
         // );
-        // console.log(result2);
+        
       });
     },
 
@@ -176,13 +176,14 @@ export default {
             works: doc.data().works,
           };
           this.projects.push(objectTimer);
+          
         });
       });
     },
 
     controlAdmin() {
       const admin = this.uid;
-      if (admin === "2ca0Pr8KZTUTJpohiqJYHdWqx7C2") {
+      if (admin === "2ca0Pr8KZTUTJpohiqJYHdWqx7C2" || "SsBb6AgyHAdUKSQwlwnkq8N5SeF2") {
         return this.getDoc();
       } else {
         return this.queryDoc();

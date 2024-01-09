@@ -66,7 +66,7 @@ export default {
   mounted() {
     if (
       JSON.parse(localStorage.getItem("user")).uid ===
-      "2ca0Pr8KZTUTJpohiqJYHdWqx7C2"
+      "2ca0Pr8KZTUTJpohiqJYHdWqx7C2" || "SsBb6AgyHAdUKSQwlwnkq8N5SeF2"
     ) {
       this.client = true;
     }
