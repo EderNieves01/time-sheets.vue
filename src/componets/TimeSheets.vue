@@ -53,7 +53,7 @@
 
     <div class="container mt-3">
       <hr />
-      <table-timers :projects="projects" :total="total"/>
+      <table-timers :projects="projects" />
     </div>
   </div>
 </template>
@@ -84,7 +84,7 @@ export default {
       status: false,
       admin: "",
       client: "",
-      total: ""
+      total: "",
     };
   },
   components: { TableTimers, VueDatePicker },
@@ -148,15 +148,17 @@ export default {
             client: doc.data().client,
           };
           this.projects.push(todo);
-          
         });
- this.total = this.projects.reduce((element, element1) => element + element1.works, 0)
-         console.log(this.total)
-         const result2 = this.projects.filter((element) => element.status === true)
-         console.log(result2)
-  
+        // this.total = this.projects.reduce(
+        //   (element, element1) => element + element1.works,
+        //   0
+        // );
+        // console.log(this.total);
+        // const result2 = this.projects.filter(
+        //   (element) => element.status === true
+        // );
+        // console.log(result2);
       });
-      
     },
 
     queryDoc() {
@@ -174,11 +176,8 @@ export default {
             works: doc.data().works,
           };
           this.projects.push(objectTimer);
-         
         });
-        
       });
-     
     },
 
     controlAdmin() {

@@ -31,8 +31,8 @@
           </tr>
         </tbody>
       </table>
-      <h1>Horas: {{total}}</h1>
-      <h1>Monto a pagar pagar:{{total * 58}} </h1>
+      <!-- <h1>Horas: {{total}}</h1>
+      <h1>Monto a pagar pagar:{{total * 58}} </h1> -->
     </div>
   </div>
   <div v-else class="text-center mt-5">
@@ -58,10 +58,10 @@ export default {
       type: Array,
       default: () => [],
     },
-     total: {
-      type: Number,
-      default: () => 0,
-    },
+    //  total: {
+    //   type: Number,
+    //   default: () => 0,
+    // },
   },
   mounted() {
     if (
