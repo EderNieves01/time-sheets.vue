@@ -31,6 +31,8 @@
           </tr>
         </tbody>
       </table>
+      <h1>Horas: {{total}}</h1>
+      <h1>Monto a pagar pagar:{{total * 58}} </h1>
     </div>
   </div>
   <div v-else class="text-center mt-5">
@@ -48,6 +50,7 @@ export default {
     return {
       numeroPendiente: 0,
       client: false,
+      total: Number,
     };
   },
   props: {
@@ -55,16 +58,25 @@ export default {
       type: Array,
       default: () => [],
     },
+     total: {
+      type: Number,
+      default: () => 0,
+    },
   },
   mounted() {
-    // console.log(this.projects.date)
     if (
       JSON.parse(localStorage.getItem("user")).uid ===
       "2ca0Pr8KZTUTJpohiqJYHdWqx7C2"
     ) {
       this.client = true;
     }
-  },
+  //  const total = this.projects.map((total) => total.works);
+  //  const result = total.reduce((acumulator, currentAcumulator) => acumulator + currentAcumulator);
+  //  console.log(result)
+  // const result = this.projects.map((Element) =>  Element);
+  // console.log(result)
+  //  this.total = total.reduce((acumulator, currentAcumulator) => acumulator + currentAcumulator, 0);
+   },
   methods: {
     format(seconds) {
       if (seconds) {
