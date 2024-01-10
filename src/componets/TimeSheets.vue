@@ -10,8 +10,9 @@
         <VueDatePicker
           v-model.value="date"
           range
-          range-max="4"
+          range-min="4"
           :max-date="new Date()"
+          :enable-time-picker="false"
           required
         ></VueDatePicker>
       </div>
@@ -76,7 +77,7 @@ export default {
   data() {
     return {
       projects: [],
-      date: "",
+      date: '',
       date1: undefined,
       works: null,
       projectName: "",
